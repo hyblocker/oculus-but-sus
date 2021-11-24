@@ -51,6 +51,7 @@ crewmateDirections.forEach(dir => {
 });
 
 window.onload = function() {
+	console.log('sussy!!');
 	const amogusContainer = document.createElement('div');
 	amogusContainer.classList.add('amogus', 'crewmate-container');
 
