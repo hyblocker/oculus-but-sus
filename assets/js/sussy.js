@@ -19,7 +19,7 @@ const crewmatePalettes = [
 	{ body: "3B177C", shadow: "6B2FBB", outline: "1C003F" }, // purple
 	{ body: "C38822", shadow: "FFEB5A", outline: "432800" }, // yellow
 	{ body: "AC2BAE", shadow: "EE54BB", outline: "691A6B" }, // pink
-	{ body: "5E2615", shadow: "71491E", outline: "38160C" }, // brown
+	{ body: "5E2615", shadow: "71491E", outline: "260E08" }, // brown
 	{ body: "15A842", shadow: "50F039", outline: "0A511F" }, // lime
 	{ body: "09158E", shadow: "132ED2", outline: "030938" }, // blue
 	{ body: "B43E15", shadow: "F07D0D", outline: "381306" }, // orange
