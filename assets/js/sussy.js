@@ -36,6 +36,7 @@ function spawnCrewmate() {
 			y: posY,
 		},
 		velocity: rotate(crewmateDirections[crewmateID], rotation),
+		scale: scale,
 		speed: scale * 10,
 		rotation: rotation,
 	});
@@ -78,7 +79,29 @@ function animate() {
 		impostor.position.y += TIMESTEP * impostor.velocity.y * impostor.speed;
 
 		// TODO: Wrap + respawn as different crewmate
+		if (outOfBounds(impostor)) {
 
-		impostor.element.style.transform = `translate(${impostor.position.x}px, ${impostor.position.y}px) rotate(${impostor.rotation}deg)`;
+			const crewmateID = Math.floor(Math.random() * 4);
+			const amogusImg = impostor.element.children[0];
+			amogusImg.src = `/assets/impostors/crewmate${crewmateID + 1}.svg`;
+
+			impostor.rotation = Math.random() * 360.0;
+			impostor.scale = (Math.random() * 0.6 + 0.8);
+			impostor.speed = impostor.scale * 10;
+			impostor.position.x = Math.sign(2 * Math.random()) * impostor.speed + document.body.clientWidth;
+			impostor.position.y = Math.random() * document.body.scrollHeight;
+			impostor.velocity = rotate(crewmateDirections[crewmateID], impostor.rotation);
+		}
+
+		impostor.element.style.transform = `scale(${impostor.scale}) translate(${impostor.position.x}px, ${impostor.position.y}px) rotate(${impostor.rotation}deg)`;
 	});
+}
+function outOfBounds(impostor) {
+	return !(
+			impostor.position.x > -impostor.scale * 50 &&
+			impostor.position.x < document.body.scrollWidth + impostor.scale * 50 &&
+
+			impostor.position.y > 60 -impostor.scale * 50 &&
+			impostor.position.y < document.body.scrollHeight + impostor.scale * 50
+			);
 }
