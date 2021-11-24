@@ -1,3 +1,9 @@
+
+:root {
+	--body:#0a4d2e;
+	--shadow:#11802d;
+	--outline:#052519;
+}
 body {
 	position: relative;
 }
@@ -27,9 +33,10 @@ body {
 	top: 0;
 	left: 0;
 }
-.crewmate > img {
+.crewmate > svg {
 	width: 100%;
 }
+/* layering */
 .rbpbduva.p00k3eym.s2xhriuh.lvqykqo5.se9zvvl8.m98qiilh.dlvx4kqw.dnsy10im.gzlw2da8.niumf9i0.ct0gonzb.qa94a3ay.rzh9kqjf.s4rrrcul.orocs0gv.oncswdae.qs98hkve.oasyxld9.mm8y8im2.mnbq7hy4,
 .j0w2kb1n.l8yeckdy.hcbh85ta.cqwkjfc6.rezhw0dz.nmxi6925.o200iux9.m5huqoh2.rtg8rq90.bkmd7nb6.e0i9t92k.a5babw7g.s3aypnj4.tn1datze.ac3imm9t.c3cxe1zt.f1y601m5.dbqign6t > .zy2wb8vn:only-child > .zy2wb8vn:last-child,
 .j0w2kb1n.l8yeckdy.hcbh85ta.cqwkjfc6.rezhw0dz.nmxi6925.o200iux9.m5huqoh2.rtg8rq90.bkmd7nb6.e0i9t92k.a5babw7g.s3aypnj4.tn1datze.ac3imm9t.c3cxe1zt.f1y601m5.dbqign6t > .zy2wb8vn:not(:first-child),
