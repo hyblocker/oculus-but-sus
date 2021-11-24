@@ -50,7 +50,7 @@ crewmateDirections.forEach(dir => {
 	dir.y /= len;
 });
 
-window.onload = function() {
+document.addEventListener("DOMContentLoaded", function(e) {
 	console.log('sussy!!');
 	const amogusContainer = document.createElement('div');
 	amogusContainer.classList.add('amogus', 'crewmate-container');
@@ -64,7 +64,7 @@ window.onload = function() {
 
 	// animate
 	setInterval(animate, 30);
-}
+});
 
 function rotate(vec, angle) {
 	return {
