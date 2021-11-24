@@ -51,7 +51,6 @@ crewmateDirections.forEach(dir => {
 });
 
 document.addEventListener("DOMContentLoaded", function(e) {
-	console.log('sussy!!');
 	const amogusContainer = document.createElement('div');
 	amogusContainer.classList.add('amogus', 'crewmate-container');
 
@@ -77,6 +76,9 @@ function animate() {
 	crewmates.forEach(impostor => {
 		impostor.position.x += TIMESTEP * impostor.velocity.x * impostor.speed;
 		impostor.position.y += TIMESTEP * impostor.velocity.y * impostor.speed;
+
+		// TODO: Wrap + respawn as different crewmate
+
 		impostor.element.style.transform = `translate(${impostor.position.x}px, ${impostor.position.y}px) rotate(${impostor.rotation}deg)`;
 	});
 }
