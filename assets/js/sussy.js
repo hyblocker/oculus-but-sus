@@ -31,11 +31,15 @@ function spawnCrewmate() {
 	amogus.classList.add('amongus', 'crewmate');
 
 	const crewmateID = Math.floor(Math.random() * 4);
+	const palette = crewmatePalettes[Math.floor(Math.random() * crewmatePalettes.length)];
 
 	// const amogusImg = document.createElement('img');
 	// amogusImg.src = `/assets/impostors/crewmate${crewmateID + 1}.svg`;
 	// amogus.appendChild(amogusImg);
-	amogus.innerHTML = crewmateIds[crewmateID];
+	amogus.innerHTML = crewmateIds[crewmateID]
+		.replaceAll('var(--body)', `#${palette.body}`)
+		.replaceAll('var(--shadow)', `#${palette.shadow}`)
+		.replaceAll('var(--outline)', `#${palette.outline}`);
 	const amgousImg = amogus.children[0];
 
 	let rotation = Math.random() * 360.0;
@@ -44,8 +48,8 @@ function spawnCrewmate() {
 	let scale = Math.random() * 0.6 + 0.8;
 
 	// amogus.style.transform = `scale(${scale}) translate(${posX}px, ${posY}px) rotate(${rotation}deg)`;
-	const palette = crewmatePalettes[Math.floor(Math.random() * crewmatePalettes.length)];
-	amogus.style.cssText = `--body: #${palette.body}; --shadow: #${palette.shadow}; --outline: #${palette.outline}; transform: scale(${scale}) translate(${posX}px, ${posY}px) rotate(${rotation}deg)`;
+	// amogus.style.cssText = `--body: #${palette.body}; --shadow: #${palette.shadow}; --outline: #${palette.outline}; transform: scale(${scale}) translate(${posX}px, ${posY}px) rotate(${rotation}deg)`;
+	amogus.style.cssText = `transform: scale(${scale}) translate(${posX}px, ${posY}px) rotate(${rotation}deg)`;
 
 	crewmates.push({
 		element: amogus,
@@ -105,9 +109,13 @@ function animate() {
 		if (outOfBounds(impostor)) {
 
 			const crewmateID = Math.floor(Math.random() * 4);
+			const palette = crewmatePalettes[Math.floor(Math.random() * crewmatePalettes.length)];
 			//const amogusImg = impostor.element.children[0];
 			//amogusImg.src = `/assets/impostors/crewmate${crewmateID + 1}.svg`;
-			impostor.element.innerHTML = crewmateIds[crewmateID];
+			impostor.element.innerHTML = crewmateIds[crewmateID]
+				.replaceAll('var(--body)', `#${palette.body}`)
+				.replaceAll('var(--shadow)', `#${palette.shadow}`)
+				.replaceAll('var(--outline)', `#${palette.outline}`);
 
 			impostor.rotation = Math.random() * 360.0;
 			impostor.scale = (Math.random() * 0.6 + 0.8);
