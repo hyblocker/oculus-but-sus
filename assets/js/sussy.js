@@ -33,22 +33,16 @@ function spawnCrewmate() {
 	const crewmateID = Math.floor(Math.random() * 4);
 	const palette = crewmatePalettes[Math.floor(Math.random() * crewmatePalettes.length)];
 
-	// const amogusImg = document.createElement('img');
-	// amogusImg.src = `/assets/impostors/crewmate${crewmateID + 1}.svg`;
-	// amogus.appendChild(amogusImg);
 	amogus.innerHTML = crewmateIds[crewmateID]
 		.replaceAll('var(--body)', `#${palette.body}`)
 		.replaceAll('var(--shadow)', `#${palette.shadow}`)
 		.replaceAll('var(--outline)', `#${palette.outline}`);
-	const amgousImg = amogus.children[0];
-
+	
 	let rotation = Math.random() * 360.0;
 	let posX = Math.random() * document.body.clientWidth;
 	let posY = Math.random() * document.body.scrollHeight;
 	let scale = Math.random() * 0.6 + 0.8;
 
-	// amogus.style.transform = `scale(${scale}) translate(${posX}px, ${posY}px) rotate(${rotation}deg)`;
-	// amogus.style.cssText = `--body: #${palette.body}; --shadow: #${palette.shadow}; --outline: #${palette.outline}; transform: scale(${scale}) translate(${posX}px, ${posY}px) rotate(${rotation}deg)`;
 	amogus.style.cssText = `transform: scale(${scale}) translate(${posX}px, ${posY}px) rotate(${rotation}deg)`;
 
 	crewmates.push({
@@ -75,13 +69,14 @@ crewmateDirections.forEach(dir => {
 
 document.addEventListener("DOMContentLoaded", async function(e) {
 
+	// load crewmate svgs into memory
 	for (let i = 0; i < 5; i++) {
 		await fetchCrewmate(i);
 	}
 
+	// create the crewmate container, and add it to the DOM
 	const amogusContainer = document.createElement('div');
 	amogusContainer.classList.add('amogus', 'crewmate-container');
-
 	document.body.appendChild(amogusContainer);
 
 	// spawn the sus
@@ -93,6 +88,7 @@ document.addEventListener("DOMContentLoaded", async function(e) {
 	setInterval(animate, 30);
 });
 
+// Animates a vector by the given angle
 function rotate(vec, angle) {
 	return {
 		x: (Math.cos(degToRad * angle) * vec.x - Math.sin(degToRad * angle) * vec.y),
@@ -101,17 +97,18 @@ function rotate(vec, angle) {
 }
 
 function animate() {
-	crewmates.forEach(impostor => {
+	// crewmates.forEach(impostor => {
+	for (let i = 0; i < crewmates.length; i++) {
+		const impostor = crewmates[i];
 		impostor.position.x += TIMESTEP * impostor.velocity.x * impostor.speed;
 		impostor.position.y += TIMESTEP * impostor.velocity.y * impostor.speed;
 
-		// TODO: Wrap + respawn as different crewmate
 		if (outOfBounds(impostor)) {
 
 			const crewmateID = Math.floor(Math.random() * 4);
 			const palette = crewmatePalettes[Math.floor(Math.random() * crewmatePalettes.length)];
-			//const amogusImg = impostor.element.children[0];
-			//amogusImg.src = `/assets/impostors/crewmate${crewmateID + 1}.svg`;
+			
+			// change palette
 			impostor.element.innerHTML = crewmateIds[crewmateID]
 				.replaceAll('var(--body)', `#${palette.body}`)
 				.replaceAll('var(--shadow)', `#${palette.shadow}`)
@@ -126,7 +123,8 @@ function animate() {
 		}
 
 		impostor.element.style.transform = `scale(${impostor.scale}) translate(${impostor.position.x}px, ${impostor.position.y}px) rotate(${impostor.rotation}deg)`;
-	});
+	}
+	// });
 }
 function outOfBounds(impostor) {
 	return !(
@@ -138,6 +136,7 @@ function outOfBounds(impostor) {
 			);
 }
 
+// fetches a crewmate
 async function fetchCrewmate(id) {
 	await fetch( `/assets/impostors/crewmate${id + 1}.svg`)
     	.then(r => r.text())
