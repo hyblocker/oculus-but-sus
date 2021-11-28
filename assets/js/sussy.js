@@ -1,3 +1,5 @@
+// made by the most retarded person you don't know: Hekky / Hyblocker
+
 const WIDTH_MIN = 40;
 const WIDTH_MAX = 80;
 
@@ -69,6 +71,8 @@ crewmateDirections.forEach(dir => {
 
 document.addEventListener("DOMContentLoaded", async function(e) {
 
+	const totalCrewmates = document.body.getAttribute('data-max-crewmates') ?? 256;
+
 	// load crewmate svgs into memory
 	for (let i = 0; i < 5; i++) {
 		await fetchCrewmate(i);
@@ -79,8 +83,13 @@ document.addEventListener("DOMContentLoaded", async function(e) {
 	amogusContainer.classList.add('amogus', 'crewmate-container');
 	document.body.appendChild(amogusContainer);
 
+	// have fun taking pissshots now
+	window.toggleAmogus = function() {
+		amogusContainer.style.display = amogusContainer.style.display == 'none' ? 'block' : 'none';
+	};
+
 	// spawn the sus
-	for (let i = 0; i < 256; i++) {
+	for (let i = 0; i < totalCrewmates; i++) {
 		amogusContainer.appendChild(spawnCrewmate());
 	}
 
