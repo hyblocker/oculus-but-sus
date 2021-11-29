@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", async function(e) {
 	}
 
 	// animate
-	setInterval(animate, 30);
+	window.requestAnimationFrame(animate);
 });
 
 // Animates a vector by the given angle
@@ -105,12 +105,16 @@ function rotate(vec, angle) {
 	}
 }
 
-function animate() {
-	// crewmates.forEach(impostor => {
+let elapsed = 0;
+
+function animate(timestep) {
+	let delta = timestep - elapsed;
+	elapsed += delta;
+
 	for (let i = 0; i < crewmates.length; i++) {
 		const impostor = crewmates[i];
-		impostor.position.x += TIMESTEP * impostor.velocity.x * impostor.speed;
-		impostor.position.y += TIMESTEP * impostor.velocity.y * impostor.speed;
+		impostor.position.x += TIMESTEP * impostor.velocity.x * impostor.speed * delta * 0.01;
+		impostor.position.y += TIMESTEP * impostor.velocity.y * impostor.speed * delta * 0.01;
 
 		if (outOfBounds(impostor)) {
 
@@ -133,7 +137,8 @@ function animate() {
 
 		impostor.element.style.transform = `scale(${impostor.scale}) translate(${impostor.position.x}px, ${impostor.position.y}px) rotate(${impostor.rotation}deg)`;
 	}
-	// });
+
+	window.requestAnimationFrame(animate);
 }
 function outOfBounds(impostor) {
 	return !(

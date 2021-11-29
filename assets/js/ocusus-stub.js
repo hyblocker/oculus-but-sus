@@ -11,8 +11,6 @@ function bindMobileNav() {
 
 	for (let i = 0; i < mobileNavItems.length; i++) {
 		const button = mobileNavItems[i].parentNode.querySelectorAll('[role="button"]')[0];
-		console.log('button', button);
-		console.log('list', mobileNavItems[i]);
 
 		button.onclick = function(e) {
 			if (mobileNavItems[i].style.height == "0px") {
