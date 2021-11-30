@@ -13,10 +13,18 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	window.requestAnimationFrame(animateBase);
 });
 
+let elapsed = 0;
+
 function animateBase(timestep) {
+	let delta = timestep - elapsed;
+	elapsed += delta;
 
-	console.log(timestep);
-
+	// 2 second delay
+	if (elapsed < 400) {
+		window.requestAnimationFrame(animateBase);
+		return;
+	}
+	
 	// animate title in
 	buffer.headsetTitle.children[0].style.opacity = 1;
 	buffer.headsetTitle.children[0].style.transform = 'translateY(0px)';
