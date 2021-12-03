@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	buffer.hmdContainer = hmdRootContainer.children[1];
 	buffer.reviewContainer = hmdRootContainer.children[2];
 	buffer.separator = hmdRootContainer.children[3];
+	buffer.floatInContainer = document.getElementById("float-in-container");
 
 	window.requestAnimationFrame(animateBase);
 });
@@ -45,6 +46,13 @@ function animateBase(timestep) {
 	// animate reviews
 	buffer.reviewContainer.children[0].style.opacity = 1;
 	buffer.reviewContainer.children[0].style.transform = 'translateY(0px)';
+
+	// animate reviews
+	for (let i = 0; i < buffer.floatInContainer.children.length; i++) {
+		console.log(i + "", buffer.floatInContainer.children[i].children[0])
+		buffer.floatInContainer.children[i].children[0].style.opacity = '1';
+		buffer.floatInContainer.children[i].children[0].style.transform = 'translate(0px) scale(1)';
+	}
 }
 
 function animateController(controllerElement) {
